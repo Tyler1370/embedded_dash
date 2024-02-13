@@ -146,3 +146,26 @@
   height: 30px;
   background-color: red;
 }
+
+.needle {
+  position: absolute;
+  top: 113px;
+  left: 0;
+  width: 118px;
+  height: 0;
+  margin-right: 20px;
+  border-left: 60px solid #00fff7;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent; /* Adjust color as needed */
+  transform-origin: right;
+  animation: rotateAnimation 1s infinite linear alternate;
+}
+
+@keyframes rotateAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
