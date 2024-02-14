@@ -4,20 +4,54 @@ import "./App.css";
 
 function App() {
   const [energy, setEnergy] = useState(75); // 0 - 100
+  const [IMD, setIMD] = useState(0); // 0 - off, 1 - good, 2 - error
+  const [PCC, setPCC] = useState(0);
+  const [speed, setSpeed] = useState(0); // 0 - 80
+
   useEffect(() => {
-    setEnergy(75);
+    document.addEventListener("keypress", handleKeyPress, true);
   }, []);
+
+  const handleKeyPress = (e) => {
+    if (e.key === "1") {
+      setIMD((curr) => (curr + 1) % 3);
+    }
+    if (e.key === "2") {
+      setPCC((curr) => (curr + 1) % 3);
+    }
+    if (e.key === " ") {
+      setSpeed((curr) => curr + 1);
+      setEnergy((curr) => curr - 0.05);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-between items-center text-center w-[800px] h-[480px] p-10 bg-black text-white ">
       {/* header */}
       <div className="flex flex-row justify-between items-center w-fit gap-8">
         <div className="flex flex-row justify-center items-center gap-2">
           <p className="">IMD</p>
-          <div className="w-2 h-2 rounded-full bg-white"></div>
+          <div
+            className={`w-2 h-2 rounded-full ${
+              IMD == 0
+                ? "bg-gray-600"
+                : IMD == 1
+                ? "bg-green-500"
+                : "bg-red-600"
+            }`}
+          ></div>
         </div>
         <div className="flex flex-row justify-center items-center gap-2">
           <p className="">PCC</p>
-          <div className="w-2 h-2 rounded-full bg-white"></div>
+          <div
+            className={`w-2 h-2 rounded-full ${
+              PCC == 0
+                ? "bg-gray-600"
+                : PCC == 1
+                ? "bg-green-500"
+                : "bg-red-600"
+            }`}
+          ></div>
         </div>
         <div>
           <p className="">60.4 A</p>
@@ -42,8 +76,8 @@ function App() {
           <div className="needle z-0 drop-shadow-[0_0px_4px_#00FFF7]"></div>
         </div>
         <div className="absolute flex flex-row items-end">
-          <p className="text-6xl font-bold">17</p>
-          <p className="text-base -ml-1">mph</p>
+          <p className="text-6xl font-bold">{speed}</p>
+          <p className="text-base">mph</p>
         </div>
       </div>
       {/* footer */}
