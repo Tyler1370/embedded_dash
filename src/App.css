@@ -77,8 +77,6 @@
   z-index: 2;
 }
 
-.mph-slider {
-}
 
 .mph-level {
   position: absolute;
@@ -149,16 +147,16 @@
 
 .needle {
   position: absolute;
-  top: 113px;
-  left: 0;
-  width: 118px;
-  height: 0;
-  margin-right: 20px;
+  top: 111px;
+  /* left: -2px; */
+  width: 116px;
+  /* height: 0; */
+  /* margin-right: 20px; */
   border-left: 60px solid #00fff7;
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent; /* Adjust color as needed */
   transform-origin: right;
-  animation: rotateAnimation 1s infinite linear alternate;
+  /* animation: rotateAnimation 1s infinite linear alternate; */
 }
 
 @keyframes rotateAnimation {
