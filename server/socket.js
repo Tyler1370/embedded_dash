@@ -6,7 +6,7 @@ const wss = new WebSocket.Server({ noServer: true });
 let Gpio;
 // Use pigpio-mock if running on macOS, otherwise use onoff
 // changed to npm package supported with linux
-if (process.platform === "darwin") {
+if (process.platform !== "linux") {
   const pigpioMock = require("pigpio-mock");
   Gpio = pigpioMock.Gpio;
 } else {
