@@ -68,3 +68,20 @@ export const useKeyPressEffect = () => {
     };
   }, [setEnergy, setIMD, setPCC, setSpeed, setAccelerating]);
 };
+
+export const CANBusWebSocket = () => {
+  const { setSpeed } = useContext(DashContext);
+  useEffect(() => {
+    const socket = new WebSocket("ws://localhost:3001"); // Replace with your server WebSocket endpoint
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      setSpeed(data.speed);
+    };
+
+    // Cleanup WebSocket on component unmount
+    return () => {
+      socket.close();
+    };
+  }, [setSpeed]);
+};

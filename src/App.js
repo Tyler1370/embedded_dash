@@ -1,50 +1,85 @@
-// import "./App.css";
-// import Header from "./components/header";
-// import Speed from "./components/speed";
-// import Footer from "./components/footer";
-// import { useAccelerationEffect, useKeyPressEffect } from "./hooks/effects";
+import "./App.css";
+import Header from "./components/header";
+import Speed from "./components/speed";
+import Footer from "./components/footer";
+import {
+  // useAccelerationEffect,
+  // useKeyPressEffect,
+  CANBusWebSocket,
+} from "./hooks/effects";
 
-// const App = () => {
-//   useAccelerationEffect();
-//   useKeyPressEffect();
+const App = () => {
+  // useAccelerationEffect();
+  // useKeyPressEffect();
+  CANBusWebSocket();
+
+  return (
+    <div className="flex flex-col justify-between items-center text-center w-[800px] h-[480px] p-10 bg-black text-white ">
+      <Header />
+      <Speed />
+      <Footer />
+    </div>
+  );
+};
+
+export default App;
+
+// -----------------------------------------------------------------
+
+// import React, { useState, useEffect } from "react";
+
+// function App() {
+//   const [gpioState, setGpioState] = useState(0);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       fetch("http://localhost:3001/api/gpio-state")
+//         .then((response) => response.json())
+//         .then((data) => {
+//           setGpioState(data.state);
+//           console.log(data.state);
+//         })
+//         .catch((error) => console.error("Error fetching GPIO state:", error));
+//     };
+
+//     const intervalId = setInterval(() => {
+//       fetchData();
+//     }, 1000);
+
+//     return () => clearInterval(intervalId);
+//   }, []);
 
 //   return (
-//     <div className="flex flex-col justify-between items-center text-center w-[800px] h-[480px] p-10 bg-black text-white ">
-//       <Header />
-//       <Speed />
-//       <Footer />
+//     <div>
+//       <h1>GPIO State: {gpioState}</h1>
 //     </div>
 //   );
-// };
+// }
 
 // export default App;
 
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+// -----------------------------------------------------------------
 
-function App() {
-  const [gpioState, setGpioState] = useState(0);
+// import React, { useState, useEffect } from "react";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://raspberry-pi-ip:3001/api/gpio-state"
-        );
-        setGpioState(response.data.state);
-      } catch (error) {
-        console.error("Error fetching GPIO state:", error);
-      }
-    };
+// const App = () => {
+//   const [speed, setSpeed] = useState(null);
 
-    fetchData();
-  }, []);
+//   useEffect(() => {
+//     const socket = new WebSocket("ws://localhost:3001"); // Replace with your server WebSocket endpoint
 
-  return (
-    <div>
-      <h1>GPIO State: {gpioState}</h1>
-    </div>
-  );
-}
+//     socket.onmessage = (event) => {
+//       const data = JSON.parse(event.data);
+//       setSpeed(data.speed);
+//     };
 
-export default App;
+//     // Cleanup WebSocket on component unmount
+//     return () => {
+//       socket.close();
+//     };
+//   }, []);
+
+//   return <div>{speed !== null && <p>Speed: {speed} km/h</p>}</div>;
+// };
+
+// export default App;

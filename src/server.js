@@ -1,25 +1,32 @@
 const express = require("express");
 const app = express();
+
+const cors = require("cors");
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
+app.use(cors(corsOptions));
 let Gpio;
 
 // Use pigpio-mock if running on macOS, otherwise use onoff
-// if (process.platform === "darwin") {
-//   const pigpioMock = require("pigpio-mock");
-//   Gpio = pigpioMock.Gpio;
-// } else {
-Gpio = require("onoff").Gpio;
-// }
+if (process.platform === "darwin") {
+  const pigpioMock = require("pigpio-mock");
+  Gpio = pigpioMock.Gpio;
+} else {
+  Gpio = require("onoff").Gpio;
+}
 
 const gpioPin = new Gpio(17, "out");
 
 app.get("/api/gpio-state", (req, res) => {
-  const state = gpioPin.readSync();
+  const state = gpioPin.digitalRead();
   res.json({ state });
 });
 
+// digitalWrite for mock | writeSync for onoff
 app.post("/api/set-gpio-state/:state", async (req, res) => {
   const newState = parseInt(req.params.state, 10);
-  gpioPin.write(newState);
+  gpioPin.digitalWrite(newState);
 
   // Use a timeout to simulate an asynchronous state change
   //   setTimeout(() => {
