@@ -5,13 +5,15 @@ import Footer from "./components/footer";
 import {
   // useAccelerationEffect,
   // useKeyPressEffect,
-  CANBusWebSocket,
+  // CANBusWebSocket,
+  useSimulateAll,
 } from "./hooks/effects";
 
 const App = () => {
   // useAccelerationEffect();
   // useKeyPressEffect();
-  CANBusWebSocket();
+  // CANBusWebSocket();
+  useSimulateAll();
 
   return (
     <div className="flex flex-col justify-between items-center text-center w-[800px] h-[480px] p-10 bg-black text-white ">

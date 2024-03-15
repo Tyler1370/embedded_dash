@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import DashContext from "../context/DashContext";
 
 export const useAccelerationEffect = () => {
@@ -84,4 +84,40 @@ export const CANBusWebSocket = () => {
       socket.close();
     };
   }, [setSpeed]);
+};
+
+export const useSimulateAll = () => {
+  const { setEnergy, setIMD, setPCC, setSpeed } = useContext(DashContext);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    setIMD((curr) => (curr + 1) % 3);
+    setPCC((curr) => (curr + 2) % 3);
+
+    const toggleSpeed = () => {
+      setEnergy((curr) => {
+        if (curr === 0) return 100;
+        else return curr - 1;
+      });
+      setSpeed((curr) => {
+        if (curr === 80) return 0;
+        else return curr + 1;
+      });
+    };
+
+    let intervalId;
+    if (active) {
+      intervalId = setInterval(toggleSpeed, 80);
+    }
+
+    document.addEventListener("mouseup", handleKeyPress);
+    return () => {
+      document.removeEventListener("mouseup", handleKeyPress);
+      clearInterval(intervalId);
+    };
+  }, [active, setIMD, setPCC, setEnergy, setSpeed]);
+
+  const handleKeyPress = () => {
+    setActive((curr) => !curr);
+  };
 };
