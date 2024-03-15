@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import DashContext from "../context/DashContext";
+import DashContext from "../context/DashContext.js";
 import { TiBatteryHigh } from "react-icons/ti";
 import { motion } from "framer-motion";
 

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import DashContext from "../context/DashContext";
+import DashContext from "../context/DashContext.js";
 
 const Header = () => {
   const { IMD, PCC, amperage } = useContext(DashContext);

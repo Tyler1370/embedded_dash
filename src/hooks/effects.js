@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import DashContext from "../context/DashContext";
+import DashContext from "../context/DashContext.js";
 
 export const useAccelerationEffect = () => {
   const { energy, setEnergy, speed, setSpeed, accelerating } =

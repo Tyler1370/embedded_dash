@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DashContext from "./DashContext";
+import DashContext from "./DashContext.js";
 
 const DashProvider = ({ children }) => {
   const [energy, setEnergy] = useState(75); // 0 - 100

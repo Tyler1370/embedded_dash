@@ -1,13 +1,13 @@
 import "./App.css";
-import Header from "./components/header";
-import Speed from "./components/speed";
-import Footer from "./components/footer";
+import Header from "./components/header.js";
+import Speed from "./components/speed.js";
+import Footer from "./components/footer.js";
 import {
   // useAccelerationEffect,
   // useKeyPressEffect,
   // CANBusWebSocket,
   useSimulateAll,
-} from "./hooks/effects";
+} from "./hooks/effects.js";
 
 const App = () => {
   // useAccelerationEffect();
